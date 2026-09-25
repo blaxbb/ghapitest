@@ -26,22 +26,7 @@ namespace WebAPI.Controllers
     [HttpPost(Name = "GetWeatherForecast")]
     public ActionResult GetLocation(string location)
     {
-      try
-      {
-        var intLocation = int.Parse(location);
-      }
-      catch (Exception ex)
-      {
-        return Content(ex.ToString(), "text/plain");
-      }
-
-      return Content(System.Text.Json.JsonSerializer.Serialize(Enumerable.Range(1, 5).Select(index => new WeatherForecast
-      {
-        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-        TemperatureC = Random.Shared.Next(-20, 55),
-        Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-      })
-      .ToArray()), "application/json");
+      return Content(location, "text/plain");
     }
   }
 }
