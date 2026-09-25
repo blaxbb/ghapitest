@@ -1,0 +1,63 @@
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: "CodeQL Advanced"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '18 8 * * 1'
+
+jobs:
+  analyze:
+    name: Analyze Codebase
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # Setup the .NET 10 SDK environment explicitly
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    # Initializes the CodeQL tools and disables autobuild for C#
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: csharp
+        build-mode: manual # Bypasses the default autobuild tool entirely
+    # Clean and restore all explicit targets to avoid solution-level translation issues
+    - name: Restore Project Dependencies
+      run: |
+        dotnet restore WebAPI/WebAPI.csproj
+        dotnet restore Blazor/Blazor.csproj
+
+    # Force a clean manual build target by target.
+    # Note: We omit the Test project from compilation here so CodeQL focuses purely on 
+    # capturing security-relevant data flow within your functional WebAPI and UI components.
+    - name: Isolated Build for CodeQL Extraction
+      run: |
+        dotnet build WebAPI/WebAPI.csproj --no-restore --configuration Release /p:UseSharedCompilation=false
+        dotnet build Blazor/Blazor.csproj --no-restore --configuration Release /p:UseSharedCompilation=false
+
+    # Execute the query analysis against the fully captured AST database
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:csharp"
