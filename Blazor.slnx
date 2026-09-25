@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="Blazor.csproj" />
+  <Project Path="Blazor/Blazor.csproj" />
   <Project Path="Tests/Tests.csproj" />
 </Solution>
