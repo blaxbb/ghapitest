@@ -38,10 +38,11 @@ else
 
 @code {
     private WeatherForecast[]? forecasts;
+    private string ApiKey = "123567abcdedf";
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>($"sample-data/weather.json?apiKey={ApiKey}");
     }
 
     public class WeatherForecast
