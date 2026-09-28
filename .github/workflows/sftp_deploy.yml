@@ -44,8 +44,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    environment:
-      name: testEnv
     env:
       SFTP_URL: ${{ secrets.SFTP_URL }}
       SSHPASS: ${{ secrets.SFTP_PASSWORD }}      
