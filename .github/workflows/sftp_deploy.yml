@@ -41,7 +41,5 @@ jobs:
     steps:
     - name: Download blazor artifact
       uses: actions/download-artifact@v5
-      with:
-        name: blazor
     - name: List files
       run: ls -R
