@@ -42,7 +42,7 @@ jobs:
       name: testEnv
     env:
       SFTP_URL: ${{ secrets.SFTP_URL }}
-      SSH_PASS: ${{ secrets.SFTP_PASSWORD }}      
+      SSHPASS: ${{ secrets.SFTP_PASSWORD }}      
       SFTP_PORT: ${{ secrets.SFTP_PORT }}
     steps:
     - name: Install deps
