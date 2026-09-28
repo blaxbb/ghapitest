@@ -25,16 +25,18 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build -c Release --no-restore
+      run: dotnet build --no-restore
     - name: Test
       run: dotnet test --verbosity normal
+    - name: Publish
+      run: dotnet publish
     - name: Upload Directory as Artifact
       uses: actions/upload-artifact@v4
       with:
         name: blazor
-        path: Blazor/bin/Release/net10.0/wwwroot
+        path: Blazor/bin/Release/net10.0/publish/wwwroot
     - name: Upload Directory as Artifact
       uses: actions/upload-artifact@v4
       with:
         name: api
-        path: WebAPI/bin/Release/net10.0
+        path: WebAPI/bin/Release/net10.0/publish
