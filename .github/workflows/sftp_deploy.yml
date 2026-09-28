@@ -24,4 +24,5 @@ jobs:
         run_id: ${{ github.event.workflow_run.id }}
         name: blazor
         workflow: dotnet.yml        
-    run: ls -R
+    - name: List files
+      run: ls -R
