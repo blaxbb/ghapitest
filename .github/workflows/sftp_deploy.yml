@@ -42,7 +42,7 @@ jobs:
       name: testEnv
     env:
       SFTP_URL: ${{ secrets.SFTP_URL }}
-      SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}      
+      SSH_PASS: ${{ secrets.SFTP_PASSWORD }}      
       SFTP_PORT: ${{ secrets.SFTP_PORT }}
     steps:
     - name: Install deps
@@ -53,7 +53,7 @@ jobs:
       run: ls -R
     - name: Copy files
       run: |
-        sshpass -e SFTP_PASSWORD -o StrictHostKeyChecking=no -p $SFTP_PORT $SFTP_URL <<EOF
+        sshpass -e -o StrictHostKeyChecking=no -p $SFTP_PORT $SFTP_URL <<EOF
           cd /html
           put -r blazor/.
           quit
