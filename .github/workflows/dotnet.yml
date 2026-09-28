@@ -2,6 +2,9 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
 name: .NET
+permissions:
+  contents: read
+  pull-requests: write
 
 on:
   pull_request:
@@ -25,3 +28,13 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Upload Directory as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: blazor
+        path: Blazor/bin/Release/net10.0/wwwroot
+    - name: Upload Directory as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: api
+        path: WebAPI/bin/Release/net10.0/wwwroot
