@@ -53,7 +53,7 @@ jobs:
       run: ls -R
     - name: Copy files
       run: |
-        sshpass -e sftp -P $SFTP_PORT -o StrictHostKeyChecking=no -o BatchMode=yes $SFTP_URL <<EOF
+        sshpass -e sftp -P $SFTP_PORT $SFTP_URL <<EOF
           cd /html
           put -r blazor/.
           quit
