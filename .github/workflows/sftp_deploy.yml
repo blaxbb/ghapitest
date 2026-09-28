@@ -46,7 +46,7 @@ jobs:
       SFTP_PORT: ${{ secrets.SFTP_PORT }}
     steps:
     - name: Install deps
-      run: sudo apt update && apt install -y sshpass
+      run: sudo apt update && sudo apt install -y sshpass
     - name: Download blazor artifact
       uses: actions/download-artifact@v5
     - name: List files
