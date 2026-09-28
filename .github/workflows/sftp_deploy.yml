@@ -17,12 +17,6 @@ jobs:
       with:
         run_id: ${{ github.event.workflow_run.id }}
         name: blazor
-        workflow: dotnet.yml
-    - name: Download api artifact
-      uses: actions/download-artifact@v4
-      with:
-        run_id: ${{ github.event.workflow_run.id }}
-        name: blazor
-        workflow: dotnet.yml        
+        workflow: .NET 
     - name: List files
       run: ls -R
