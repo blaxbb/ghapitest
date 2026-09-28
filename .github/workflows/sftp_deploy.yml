@@ -52,4 +52,4 @@ jobs:
     - name: List files
       run: ls -R
     - name: Copy files
-      run: sshpass -e sftp -P $SFTP_PORT $SFTP_URL:/html <<< $'put -r blazor/.'
+      run: sshpass -e sftp -P $SFTP_PORT -o StrictHostKeyChecking=no $SFTP_URL:/html <<< $'put -r blazor/.'
