@@ -15,7 +15,7 @@ on:
 
 jobs:
   build:
-    uses: ./.github/dotnet.yml
+    uses: dotnet.yml
   deploy:
     runs-on: ubuntu-latest
     needs: build
