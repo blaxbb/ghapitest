@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
 namespace WebAPI.Controllers
 {
@@ -27,6 +28,19 @@ namespace WebAPI.Controllers
     public ActionResult GetLocation(string location)
     {
       return Content(location, "text/plain");
+    }
+
+    [HttpGet]
+    public void GetUser(string unsafeUserId, string connectionString)
+    {
+      string query = "SELECT * FROM Users WHERE Id = " + unsafeUserId;
+
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+        SqlCommand command = new SqlCommand(query, connection);
+        connection.Open();
+        SqlCommand reader = command;
+      }
     }
   }
 }
