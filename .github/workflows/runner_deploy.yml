@@ -45,3 +45,9 @@ jobs:
       uses: actions/download-artifact@v5
     - name: List files
       run: ls -R
+    - name: pwd
+      run: pwd
+    - name: Remove old files
+      run: rm -r /usr/share/nginx/html/*
+    - name: Copy new files
+      run: cp -R ./blazor /usr/share/nginx/html/
