@@ -50,4 +50,4 @@ jobs:
     - name: Remove old files
       run: rm -r /usr/share/nginx/html/*
     - name: Copy new files
-      run: cp -R ./blazor /usr/share/nginx/html/
+      run: cp -R ./blazor/* /usr/share/nginx/html/
